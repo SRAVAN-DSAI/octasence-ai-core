@@ -21,11 +21,34 @@ with open(METRICS_PATH, 'r') as f:
 # --- 2. UI Configuration ---
 st.set_page_config(page_title="OctaSence AI", layout="wide", page_icon="🏗️")
 
+# --- SIDEBAR: About the Data ---
+st.sidebar.image("https://cdn-icons-png.flaticon.com/512/1087/1087815.png", width=80)
+st.sidebar.title("OctaSence Core")
+st.sidebar.markdown("---")
+st.sidebar.subheader("📂 About the Dataset")
+st.sidebar.info(
+    """
+    **Source:** BIM-AI Integrated Lifecycle Dataset
+    
+    **Validated For:**
+    * Civil Infrastructure Projects
+    * Structural Health Monitoring (SHM)
+    * Risk Forecasting
+    
+    **Key Features:**
+    * **200+** Project Records
+    * **Multimodal Fusion:** Integrates Vibration, Drone Vision scores, and Financial logs.
+    * **Ground Truth:** Risk levels verified by engineering audits.
+    """
+)
+st.sidebar.markdown("---")
+st.sidebar.caption("v1.0.2 | Deployed via Streamlit")
+
+# --- MAIN PAGE ---
 st.title("🏗️ OctaSence: Structural Risk Intelligence")
 st.markdown("### Autonomous Risk Assessment Agent")
 
-# --- 3. THE METRICS ROW (New!) ---
-# We display the live training metrics to prove model validity
+# --- 3. THE METRICS ROW ---
 st.markdown("#### 🛡️ Live Model Performance (Test Set)")
 m1, m2, m3, m4 = st.columns(4)
 m1.metric("Accuracy", f"{metrics['accuracy']*100}%", "+2%", help="Overall correctness of risk predictions")
@@ -35,7 +58,7 @@ m4.metric("F1 Score", f"{metrics['f1']}", "Balanced", help="Harmonic mean of Pre
 
 st.divider()
 
-# --- 4. Inputs (Same as before) ---
+# --- 4. Inputs ---
 FEATURE_COLUMNS = [
     'Project_Type', 'Location', 'Planned_Cost', 'Actual_Cost', 'Cost_Overrun',
     'Planned_Duration', 'Actual_Duration', 'Schedule_Deviation', 'Vibration_Level',
@@ -51,7 +74,7 @@ with col1:
     st.subheader("📡 Sensor & Drone Inputs")
     vibration = st.slider("Vibration Level (Hz)", 0.0, 10.0, 1.2)
     crack_width = st.slider("Max Crack Width (mm)", 0.0, 20.0, 0.5)
-    drone_score = st.slider("Drone Visual Score (0-100)", 0, 100, 85)
+    drone_score = st.slider("Drone Visual Score (0-100)", 0, 100, 85, help="lower is worse")
     temp = st.slider("Temperature (°C)", -10, 50, 25)
 
 with col2:
@@ -62,7 +85,7 @@ with col2:
     accident_count = st.number_input("Accidents Reported", value=0)
 
 # --- 5. Prediction Logic ---
-if st.button("🚀 Analyze Risk"):
+if st.button("🚀 Analyze Risk", type="primary"):
     input_df = pd.DataFrame(np.zeros((1, len(FEATURE_COLUMNS))), columns=FEATURE_COLUMNS)
     
     # Map Inputs
@@ -88,7 +111,6 @@ if st.button("🚀 Analyze Risk"):
 
     st.subheader(f"Prediction: {result_text}")
     
-    # Dynamic Alert Box
     if result_text == "High Risk":
         st.error(f"🚨 CRITICAL ALERT: Immediate Structural Intervention Required.")
     elif result_text == "Medium Risk":
@@ -96,6 +118,6 @@ if st.button("🚀 Analyze Risk"):
     else:
         st.success(f"✅ STATUS GREEN: Operations Normal.")
 
-    # Confidence Bar Chart
+    # Chart
     prob_df = pd.DataFrame(probs, index=["High", "Low", "Medium"], columns=["Probability"])
     st.bar_chart(prob_df)

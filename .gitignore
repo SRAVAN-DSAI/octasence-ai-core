@@ -6,7 +6,6 @@ venv/
 
 # Models & Data (Too big for standard GitHub)
 data/
-models/*.pkl
 # We KEEP metrics.json because it's small and useful for display
 !models/metrics.json
 
