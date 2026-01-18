@@ -97,7 +97,7 @@ with col2:
     st.markdown("**Sensor Network B (Project/Safety)**")
     cost_overrun = st.number_input("Cost Variance ($)", value=5000, step=1000)
     schedule_dev = st.number_input("Schedule Deviation (Days)", value=10, step=1)
-    safety_score = st.slider("Safety Compliance Score", 0, 100, 20, help="Derived from site safety logs")
+    safety_score = st.slider("Safety Compliance Score", 0, 10, 2, help="Derived from site safety logs")
     accident_count = st.number_input("Reported Incidents", value=0, step=1)
 
 # --- 5. PREDICTION ENGINE ---
