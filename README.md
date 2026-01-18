@@ -9,17 +9,17 @@
 ---
 
 ## 🚀 Live Demo
-**[Click here to launch the OctaSence Dashboard](https://share.streamlit.io/YOUR_USERNAME/octasence-ai-core)** *(Replace with your actual Streamlit link after deploying)*
+**[Click here to launch the OctaSence Dashboard](https://octasence-shm.streamlit.app/)**
 
 ---
 
 ## 🧠 Model & Methodology
-This agent utilizes a **Random Forest Ensemble** trained on the **BIM-AI Integrated Lifecycle Dataset**. It simulates a "Risk Fusion Agent" that correlates disparate data points into actionable safety alerts.
+This agent utilizes a **Xgboost Ensemble** trained on the **BIM-AI Integrated Lifecycle Dataset**. It simulates a "Risk Fusion Agent" that correlates disparate data points into actionable safety alerts.
 
 ### Performance Metrics (Test Set)
 | Metric | Score | Description |
 | :--- | :--- | :--- |
-| **Accuracy** | **92%** | Overall correct predictions across risk categories. |
+| **Accuracy** | **96%** | Overall correct predictions across risk categories. |
 | **Precision** | **High** | Minimized false alarms to prevent operational fatigue. |
 | **Latency** | **<200ms** | Real-time inference suitable for edge deployment. |
 
