@@ -1,0 +1,15 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+venv/
+.env
+
+# Models & Data (Too big for standard GitHub)
+data/
+models/*.pkl
+# We KEEP metrics.json because it's small and useful for display
+!models/metrics.json
+
+# IDE settings
+.vscode/
+.idea/
