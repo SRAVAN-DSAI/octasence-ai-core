@@ -6,4 +6,7 @@ seaborn
 joblib
 streamlit
 kagglehub
+
 xgboost
+
+altair
